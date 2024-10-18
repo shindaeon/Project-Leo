@@ -1,0 +1,3 @@
+@function color-contrast($color, $threshold: 4.5) {
+      @return $color;
+}
