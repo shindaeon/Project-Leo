@@ -1,0 +1,87 @@
+@import "~@flaticon/flaticon-uicons/css/bold/rounded.css";
+@import "~@flaticon/flaticon-uicons/css/brands/all.css";
+
+:root {
+    --primary: #f4ce14;
+    --secondary: #379777;
+    --success: #26ce46;
+    --info: #26aace;
+    --warning: #f19636;
+    --danger: #ff4343;
+    --light: #f5f7f8;
+    --dark: #303134;
+    --muted: #3e3e3e;
+}
+
+.icon-md-18 {
+    font-size: 18px !important;
+}
+
+.icon-md-24 {
+    font-size: 24px !important;
+}
+
+.icon-md-32 {
+    font-size: 32px !important;
+}
+
+.bg-grey {
+    background-color: var(--muted) !important;
+}
+
+/* Define custom font */
+@font-face {
+    font-family: "DM Mono";
+    src: url("../../public/fonts/DMMono-Regular.ttf") format("truetype");
+}
+
+button.btn.btn-square{
+    border-radius: 1rem !important;
+    padding: 1rem 1.25rem;
+}
+
+/* Monospace font override */
+.text-monospace{
+    font-family: "DM Mono", monospace;
+}
+
+/* Button overrides */
+button.btn.btn-nav{
+    border-radius: 10rem;
+    padding: 0.25rem 0.75rem;
+}
+
+.btn{
+    border-radius: 10rem;
+    padding: 0.75rem 1.5rem;
+}
+
+/* Input textboxes overrides */
+input[type="text"],
+input[type="password"],
+textarea {
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    border: 3px solid var(--light);
+
+}
+
+.card{
+    border-radius: 1.25rem;
+}
+
+table.table {
+    border-radius: 1.25rem;
+    overflow: hidden;
+}
+
+.input-group-text{
+    border-radius: 0rem 1.25rem 1.25rem 0rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+}
+
+input[type="text"]::placeholder, input[type="password"]::placeholder, textarea {
+    color: rgba(0, 0, 0, 50%);
+}
