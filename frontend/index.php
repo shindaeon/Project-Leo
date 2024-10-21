@@ -2,14 +2,15 @@
 <html lang="en">
 
 <head>
+    <title>Project Leoforeio</title>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="public/Logo%20Circle.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Leoforeio</title>
-    <link rel="stylesheet" href="src/css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="src/css/styles.css">
-    <link rel="stylesheet" href="src/css/typography.css">
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel="stylesheet" href="src/css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <link rel="stylesheet" href="src/css/typography.css" />
+    <link rel="stylesheet" href="node_modules/@flaticon/flaticon-uicons/css/bold/rounded.css" />
+    <link rel="stylesheet" href="node_modules/@flaticon/flaticon-uicons/css/brands/all.css" />
 </head>
 
 <body>
@@ -70,12 +71,11 @@
               <label for="input">Input:</label>
               <input type="text" id="input" name="input" placeholder="Heeeeee" class="form-control bg-primary text-dark">
               <div class="form-check">
-                  <label>
-                      <input type="radio" class="form-check-input">
-                  </label><label class="form-check-label">Leoforeio</label>
+                  <input type="radio" class="form-check-input">
+                  <label class="form-check-label">Leoforeio</label>
               </div>
               <div class="form-check">
-                  <input type="checkbox" class="form-check-input"><label class="form-check-label">Leoforeio</label>
+                  <input type="checkbox" class="form-check-input" name="this"><label for="this" class="form-check-label">Leoforeio</label>
               </div>
               <input type="submit" class="btn btn-outline-light" value="Submit">
           </form>
@@ -87,9 +87,7 @@
       </div>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
+  <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
   <script src="src/js/bootstrap/bootstrap.js"></script>
 </body>
 
