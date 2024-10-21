@@ -3,7 +3,7 @@
         echo "
         <div class='card text-dark bg-primary mb-3 p-1'>
             <div class='card-body'>
-                <p class='text-monospace'>
+                <p class='text-mono'>
                     $busDetails <br>
                     <span class='badge bg-dark text-primary'>$terminalName</span>
                 </p>

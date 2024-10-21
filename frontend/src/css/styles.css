@@ -1,6 +1,3 @@
-@import "~@flaticon/flaticon-uicons/css/bold/rounded.css";
-@import "~@flaticon/flaticon-uicons/css/brands/all.css";
-
 :root {
     --primary: #f4ce14;
     --secondary: #379777;
@@ -29,20 +26,9 @@
     background-color: var(--muted) !important;
 }
 
-/* Define custom font */
-@font-face {
-    font-family: "DM Mono";
-    src: url("../../public/fonts/DMMono-Regular.ttf") format("truetype");
-}
-
 button.btn.btn-square{
     border-radius: 1rem !important;
     padding: 1rem 1.25rem;
-}
-
-/* Monospace font override */
-.text-monospace{
-    font-family: "DM Mono", monospace;
 }
 
 /* Button overrides */
