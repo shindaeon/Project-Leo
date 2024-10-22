@@ -3,12 +3,10 @@
         echo "
         <div class='card text-dark bg-primary mb-3 p-1'>
             <div class='card-body'>
-                <p class='text-mono'>
-                    $busDetails <br>
-                    <span class='badge bg-dark text-primary'>$terminalName</span>
-                </p>
+                <span class='text-mono'>$busDetails</span><br>
+                <span class='badge bg-dark text-primary mb-3'>$terminalName</span>
                 
-                <h2 class='card-title'>$destinationName</h2>
+                <h3 class='card-title'>$destinationName</h3>
                 <div class='row'>
                     <div class='col-8'>
                         <p class='card-text'>

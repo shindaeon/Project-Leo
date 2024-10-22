@@ -9,8 +9,8 @@
     src: url("../../public/fonts/DMMono-Regular.ttf") format("truetype");
 }
 
-.text-mono{
-    font-family: "DM Mono", monospace;
+span.text-mono{
+    font-family: "DM Mono";
 }
   
   h1, h2, h3, .h1, .h2, .h3 {
@@ -23,16 +23,17 @@
       font-variation-settings: "wght" 500;
   }
   
-  p, span, a, body {
+body, a {
       text-decoration: none;
       font-family: "DM Sans", sans-serif;
       font-variation-settings: "wght" 400; /* 'regular' is typically 400 */
   }
   
-  button.btn, input[type="submit"].btn, input[type="reset"].btn {
+  a.btn, button.btn, input[type="submit"].btn, input[type="reset"].btn {
       font-family: "DM Sans", sans-serif;
       font-variation-settings: "wght" 700;
   }
+
   
   form label {
       font-family: "DM Sans", sans-serif;
