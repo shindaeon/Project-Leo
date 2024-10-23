@@ -4,7 +4,7 @@
 <head>
   <title>Project Leoforeio</title>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="public/Logo%20Circle.png" />
+  <link rel="icon" type="image/svg+xml" href="public/LogoCircle.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="src/css/bootstrap/bootstrap.css" />
   <link rel="stylesheet" href="src/css/typography.css" />
@@ -17,11 +17,12 @@
   <?php
   include 'src/components/NavBar.php';
   include 'src/components/Card.php';
+  include 'src/components/SearchBar.php';
 
   NavBar(
-    '<i class="fa fi-br-menu-burger"></i>',
+    '<i class="fa fi-br-menu-burger me-2"></i>',
     'Menu',
-    '<i class="fa fi-br-user"></i>',
+    '<i class="fa fi-br-user me-2"></i>',
     'Profile'
   );
 
@@ -31,20 +32,16 @@
     'Quezon City, MNL',
     '5PM October 19, 2024',
     'P 100.00'
-  )
+  );
+
+  SearchBar(
+    'Search for a destination',
+    '<i class="fi fi-br-search-location"></i>',
+  );
   ?>
-  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Enable both scrolling & backdrop</button>
+  
 
   <div class="container bg-dark text-light">
-    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <p>Try scrolling the rest of the page to see this option in action.</p>
-      </div>
-    </div>
     <h1>Heading 1</h1>
     <h2>Heading 2</h2>
     <h3>Heading 3</h3>

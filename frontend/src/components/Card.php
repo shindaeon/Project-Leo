@@ -1,6 +1,6 @@
 <?php
     function Card($busDetails, $terminalName, $destinationName, $departureTime, $farePrice) {
-        echo "
+        echo <<<HTML
         <div class='card text-dark bg-primary mb-3 p-1'>
             <div class='card-body'>
                 <span class='text-mono'>$busDetails</span><br>
@@ -22,6 +22,6 @@
                 </div>
             </div>
         </div>
-        ";
+        HTML;
     }
     ?>
