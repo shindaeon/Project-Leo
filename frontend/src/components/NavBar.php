@@ -57,7 +57,7 @@ function NavBar($btn1_icon, $btn1_name, $btn2_icon, $btn2_name)
               <h5 class="text-primary">Name O. User</h5>
               
               <p class="mb-5">useremail@example.com</p>
-              <button class="btn btn-danger">
+              <button class="btn btn-danger" onclick="logout()">
                 <i class="fi fi-br-sign-out-alt me-3"></i>Log Out
               </button>
             </div>
