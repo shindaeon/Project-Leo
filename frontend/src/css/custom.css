@@ -39,3 +39,26 @@ table.table {
       border-radius: 1.25rem;
       overflow: hidden;
 }
+
+
+.seatLabel {
+      display: inline-flexbox;
+      cursor: pointer;
+      text-align: center;
+      background-color: var(--secondary);
+}
+
+input[type="radio"] {
+      display: none;
+}
+
+input[type="radio"]:checked+label.seatLabel {
+      background-color: var(--primary);
+      color: var(--dark);
+}
+
+input[type="radio"]:disabled+label.seatLabel {
+      cursor: not-allowed;
+      background-color: var(--danger);
+      color: var(--light);
+}
