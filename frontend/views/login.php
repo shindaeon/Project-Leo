@@ -1,17 +1,23 @@
 <?php
-include '../dbconfig.php';
+session_start();
+include '../controllers/dbconfig.php';
+if (isset($_SESSION['username'])) {
+      header('Location: ../index.php');
+}
 if (isset($_POST['btn_submit'])) {
       $username = $_POST['username'];
       $password = $_POST['password'];
-      $query = $dbConnection->prepare('SELECT * FROM employees WHERE emp_username = ? AND emp_password = ?');
+      $query = $dbConnection->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
       $query->bind_param('ss', $username, $password);
 
       $query->execute();
       $res = $query->get_result();
       if ($res->num_rows > 0) {
-            session_start();
-            $_SESSION['user'] = $username;
-            // echo '<script>alert("' . $_SESSION['user'] . '")</script>';
+            $user = $res->fetch_assoc();
+            //add more session variables here, specifically username, fullname, email.
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['full_name'] = $user['full_name'];
+            $_SESSION['email'] = $user['email'];
             header('Location: ../index.php');
       } else {
             echo '<script>alert("Invalid username or password")</script>';

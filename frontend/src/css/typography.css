@@ -9,17 +9,6 @@
     src: url("../../public/fonts/DMMono-Regular.ttf") format("truetype");
 }
 
-    .f1{
-        font-size: small;
-    }
-
-    .f2{
-        font-size: medium;
-    }
-    .f3{
-        font-size: large;
-    }
-
 span.text-mono{
     font-family: "DM Mono";
 }

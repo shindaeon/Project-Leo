@@ -1,0 +1,62 @@
+[
+      {
+            "status": "taken",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 1
+      },
+      {
+            "status": "reserved",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 2
+      },
+      {
+            "status": "available",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 3
+      },
+      {
+            "status": "reserved",
+            "ticket": null,
+            "username": "test",
+            "seatNumber": 4
+      },
+      {
+            "status": "available",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 5
+      },
+      {
+            "status": "available",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 6
+      },
+      {
+            "status": "available",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 7
+      },
+      {
+            "status": "reserved",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 8
+      },
+      {
+            "status": "available",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 9
+      },
+      {
+            "status": "available",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 10
+      }
+]

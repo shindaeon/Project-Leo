@@ -1,7 +1,24 @@
 <?php
-function NavBar($btn1_icon, $btn1_name, $btn2_icon, $btn2_name)
+function NavBar($btn1_icon, $btn1_name, $btn2_icon, $btn2_name, $username, $full_name, $email)
 {
   echo <<<HTML
+    <script>
+        function logout() {
+          fetch("controllers/logout_handler.php")
+            .then((response) => response.text())
+            .then((data) => {
+              if (data == "success") {
+                window.location.href = "/Project-Leo/frontend/views/login.php";
+              } else {
+                alert(
+                  "There seems to be an issue logging you out. Please try again later."
+                );
+                console.log(data);
+              }
+            });
+        }
+
+    </script>
     <div class='container-fluid p-2 bg-grey position-sticky fixed-top'>
         <div class='row'>
             <div class='col d-flex align-items-center'>
@@ -53,10 +70,10 @@ function NavBar($btn1_icon, $btn1_name, $btn2_icon, $btn2_name)
           </div>
           <div class="row">
             <div class="col mt-3 text-center">
-              <h3 class="text-primary">@username</h3>
-              <h5 class="text-primary">Name O. User</h5>
+              <h3 class="text-primary">@$username</h3>
+              <h5 class="text-primary">$full_name</h5>
               
-              <p class="mb-5">useremail@example.com</p>
+              <p class="mb-5">$email</p>
               <button class="btn btn-danger" onclick="logout()">
                 <i class="fi fi-br-sign-out-alt me-3"></i>Log Out
               </button>
@@ -67,4 +84,3 @@ function NavBar($btn1_icon, $btn1_name, $btn2_icon, $btn2_name)
 
   HTML;
 }
-?>

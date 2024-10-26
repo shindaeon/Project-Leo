@@ -1,11 +1,6 @@
 <?php
-// if (!isset($_SESSION['user'])) {
-//   header('Location: views/login.php');
-//   exit();
-// } else {
-//   header('Location: index.php');
-//   exit();
-// }
+include 'controllers/session_checker.php';
+echo '<script>alert("' . $_SESSION['username'] . " " . $_SESSION['full_name'] . " " . $_SESSION['email'] . '")</script>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,26 +22,60 @@
   include 'src/components/NavBar.php';
   include 'src/components/Card.php';
   include 'src/components/SearchBar.php';
+  include 'controllers/dbConfig.php';
 
   NavBar(
     '<i class="fa fi-br-menu-burger me-2"></i>',
     'Menu',
     '<i class="fa fi-br-user me-2"></i>',
-    'Profile'
-  );
-
-  Card(
-    'Victory Liner #45 (AAA 001)',
-    'McDo Terminal',
-    'Quezon City, MNL',
-    '5PM October 19, 2024',
-    'P 100.00'
+    'Profile',
+    $_SESSION['username'],
+    $_SESSION['full_name'],
+    $_SESSION['email']
   );
 
   SearchBar(
     'Search for a destination',
     '<i class="fi fi-br-search-location"></i>',
   );
+
+  $query = $dbConnection->prepare("
+    SELECT 
+      buses.bus_id,
+      buses.bus_number,
+      buses.bus_plate_number,
+      buses.bus_company_name,
+      terminal_sessions.session_id,
+      terminal_sessions.destination,
+      terminal_sessions.departing_time,
+      terminal_sessions.passengers,
+      terminal_sessions.bus_status,
+      terminal_sessions.fare_price,
+      terminal_sessions.terminal_location
+    FROM 
+      buses
+    INNER JOIN 
+      terminal_sessions 
+    ON 
+      buses.current_terminal_session = terminal_sessions.session_id;
+  ");
+  $query->execute();
+  $result = $query->get_result();
+  $dbConnection->close();
+  $query->close();
+
+  foreach ($result as $row) {
+    $busDetails = $row['bus_company_name'].' #'. $row['bus_number'] .' ('. $row['bus_plate_number'].')';
+    Card(
+      $busDetails,
+      $row['terminal_location'],
+      $row['destination'],
+      $row['departing_time'],
+      $row['fare_price'],
+      $row['bus_id']
+    );
+  }
+
   ?>
 
 
