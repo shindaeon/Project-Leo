@@ -17,7 +17,6 @@ function NavBar($btn1_icon, $btn1_name, $btn2_icon, $btn2_name, $username, $full
               }
             });
         }
-
     </script>
     <div class='container-fluid p-2 bg-grey position-sticky fixed-top'>
         <div class='row'>
