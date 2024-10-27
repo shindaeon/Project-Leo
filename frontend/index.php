@@ -1,6 +1,7 @@
 <?php
 include 'controllers/session_checker.php';
 echo '<script>alert("' . $_SESSION['username'] . " " . $_SESSION['full_name'] . " " . $_SESSION['email'] . '")</script>';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,8 +21,6 @@ echo '<script>alert("' . $_SESSION['username'] . " " . $_SESSION['full_name'] . 
 <body>
   <?php
   include 'src/components/NavBar.php';
-  include 'src/components/Card.php';
-  include 'src/components/SearchBar.php';
   include 'controllers/dbConfig.php';
 
   NavBar(
@@ -33,13 +32,24 @@ echo '<script>alert("' . $_SESSION['username'] . " " . $_SESSION['full_name'] . 
     $_SESSION['full_name'],
     $_SESSION['email']
   );
+  ?>
 
-  SearchBar(
-    'Search for a destination',
-    '<i class="fi fi-br-search-location"></i>',
-  );
+  <div class="container px-2 py-3 d-flex justify-content-center align-content-center">
+    <?php
+    include 'src/components/SearchBar.php';
+    SearchBar(
+      'Search for a destination',
+      '<i class="fi fi-br-search-location"></i>',
+    );
+    ?>
+  </div>
 
-  $query = $dbConnection->prepare("
+
+
+  <div class="container p-2" id="cards">
+    <?php
+    include 'src/components/Card.php';
+    $query = $dbConnection->prepare("
     SELECT 
       buses.bus_id,
       buses.bus_number,
@@ -59,29 +69,31 @@ echo '<script>alert("' . $_SESSION['username'] . " " . $_SESSION['full_name'] . 
     ON 
       buses.current_terminal_session = terminal_sessions.session_id;
   ");
-  $query->execute();
-  $result = $query->get_result();
-  $dbConnection->close();
-  $query->close();
+    $query->execute();
+    $result = $query->get_result();
+    $dbConnection->close();
+    $query->close();
 
-  foreach ($result as $row) {
-    $busDetails = $row['bus_company_name'].' #'. $row['bus_number'] .' ('. $row['bus_plate_number'].')';
-    Card(
-      $busDetails,
-      $row['terminal_location'],
-      $row['destination'],
-      $row['departing_time'],
-      $row['fare_price'],
-      $row['bus_id']
-    );
-  }
+    foreach ($result as $row) {
+      $busDetails = $row['bus_company_name'] . ' #' . $row['bus_number'] . ' (' . $row['bus_plate_number'] . ')';
+      Card(
+        $busDetails,
+        $row['terminal_location'],
+        $row['destination'],
+        $row['departing_time'],
+        $row['fare_price'],
+        $row['bus_id']
+      );
+    }
 
-  ?>
+    ?>
+  </div>
 
 
   <!-- Include Popper.js and Bootstrap JavaScript -->
   <script src="node_modules/@popperjs/core/dist/umd/popper.js"></script>
   <script src="src/js/bootstrap/bootstrap.js"></script>
+  <script src="src/js/search.js"></script>
 </body>
 
 </html>
