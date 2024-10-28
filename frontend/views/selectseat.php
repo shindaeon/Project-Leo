@@ -6,6 +6,7 @@ if (isset($bus_id)) {
       $query = $dbConnection->prepare("
                   SELECT 
                         buses.bus_number,
+                        buses.bus_company_initials,
                         terminal_sessions.session_id,
                         terminal_sessions.departing_time,
                         terminal_sessions.passengers
@@ -104,6 +105,8 @@ $query->close();
                         $updateQuery->execute();
                         if ($updateQuery->affected_rows > 0) {
                               echo "<script>alert('Seat $selected_seat has been reserved!')</script>";
+                              $barcode = $row['session_id'].'-'.$row['bus_company_initials'].$row['bus_number'].'-'.'PS'.$selected_seat;
+
                               echo "<script>window.location.href = '../views/busdetails.php?bus_id=$bus_id'</script>";
                         } else {
                               echo "<script>alert('Failed to reserve seat $selected_seat!')</script>";
