@@ -1,3 +1,12 @@
+<?php
+include '../controllers/session_checker.php';
+include '../controllers/dbConfig.php';
+include '../src/components/Receipt.php';
+include '../src/components/BackNavBar.php';
+if (!isset($_SESSION['receiptData'])) {
+      header('Location: ../index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,43 +23,59 @@
 </head>
 
 <body>
-      <div class="card bg-primary text-dark p-4">
+      <?php
+            BackNavBar('../index.php', 'home', 'Home');
+      ?>
+      <div class="container p-3">
             <div class="row">
                   <div class="col">
-                        <svg id="barcode"></svg>
+                        <h1 class="text-primary">Book Successful</h1>
+                        <p class="text-justify bg-info text-dark p-3 m-1 rounded-4">Please <u>Save</u> this receipt, and arrive at the terminal <u>15 mins. before</u> the bus departs. Have an attendant scan this receipt ticket for it to be validated before the expiration date.</p>
                   </div>
             </div>
             <div class="row">
-                  <div class="col">
-                        <span class="text-mono">Destination:</span><br>
-                        <span class="text-mono text-uppercase d-inline-block mb-2">$destination</span><br>
-                        <span class="text-mono">Bus Name:</span><br>
-                        <span class="text-mono text-uppercase d-inline-block mb-2">$bus_name</span><br>
-                        <span class="text-mono">Bus Number:</span><br>
-                        <span class="text-mono text-uppercase d-inline-block mb-2">#$bus_number</span><br>
-                        <span class="text-mono">Bus Plate Number:</span><br>
-                        <span class="text-mono text-uppercase d-inline-block mb-2">$bus_plate_number</span><br>
-                        <span class="text-mono">Bus Type:</span><br>
-                        <span class="text-mono text-uppercase d-inline-block">$bus_type</span><br>
+                  <div class="col m-3">
+                        <?php
+                        $receiptData = $_SESSION['receiptData'];
+                        Receipt(
+                              $receiptData['barcode'],
+                              $receiptData['destination'],
+                              $receiptData['bus_name'],
+                              $receiptData['bus_number'],
+                              $receiptData['bus_plate_number'],
+                              $receiptData['bus_type'],
+                              $receiptData['seat_no'],
+                              $receiptData['fare_price'],
+                              $receiptData['date_booked'],
+                              $receiptData['expiration_date'],
+                              $receiptData['departing_time']
+                        );
+                        ?>
                   </div>
-                  <div class="col">
-                        <span class="text-mono">Seat No:</span><br>
-                        <span class="text-mono text-uppercase d-inline-block mb-2">$seat_no</span><br>
-                        <span class="text-mono">Fare Price:</span><br>
-                        <span class="text-mono text-uppercase d-inline-block mb-2">$fare_price</span><br>
-                        <span class="text-mono">Date Booked:</span><br>
-                        <span class="text-mono text-uppercase d-inline-block mb-2">$date_booked</span><br>
-                        <span class="text-mono">Book Expires on:</span><br>
-                        <span class="text-mono text-uppercase d-inline-block mb-2">$expiration_date</span><br>
-                        <span class="text-mono">Bus Departs on:</span><br>
-                        <span class="text-mono text-uppercase d-inline-block">$departing_time</span><br>
+            </div>
+            <div class="row position-sticky fixed-bottom p-3">
+                  <div class="col d-flex justify-content-end">
+                        <button class="btn btn-secondary"><i class="fi fi-br-download me-2"></i>Save Receipt</button>
                   </div>
             </div>
       </div>
 
+
+
       <!-- Include Popper.js and Bootstrap JavaScript -->
       <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
       <script src="../src/js/bootstrap/bootstrap.js"></script>
+      <script src="../src/js/qrcode/generator.js"></script>
+      <script>
+            const qr = new QRCode(document.getElementById('qrcode'), {
+                  text: <?php echo json_encode($receiptData['barcode']); ?>,
+                  width: 200,
+                  height: 200,
+                  colorDark: '#000000',
+                  colorLight: '#f4ce14',
+                  correctLevel: QRCode.CorrectLevel.H
+            });
+      </script>
 </body>
 
 </html>
