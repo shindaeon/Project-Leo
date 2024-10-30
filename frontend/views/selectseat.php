@@ -54,7 +54,7 @@ $query->close();
       <?php
       //render the back navbar
       include '../src/components/BackNavBar.php';
-      BackNavBar('../views/busdetails.php?bus_id=' . $bus_id, 'angle-left', 'Back');
+      BackNavBar('../views/busdetails.php?bus_id=' . $bus_id, 'angle-left', 'Back', 'btn_back');
       ?>
       <div class="container p-3">
             <div class="row">

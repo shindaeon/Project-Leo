@@ -1,6 +1,7 @@
 <?php
 include 'controllers/session_checker.php';
 echo '<script>alert("' . $_SESSION['username'] . " " . $_SESSION['full_name'] . " " . $_SESSION['email'] . '")</script>';
+$_SESSION['receiptData'] = null;
 
 ?>
 <!DOCTYPE html>

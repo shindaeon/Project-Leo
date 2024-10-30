@@ -53,7 +53,7 @@ $query->close();
 <body>
       <?php
       include '../src/components/BackNavBar.php';
-      BackNavBar('../index.php', 'angle-left', 'Back');
+      BackNavBar('../index.php', 'angle-left', 'Back', 'btn_back');
       ?>
       <div class="container p-3">
             <div class="row mb-3">
