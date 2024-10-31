@@ -17,7 +17,7 @@
                         </p>
                     </div>
                     <div class='col-4 d-flex justify-content-end align-items-end'>
-                        <a href="views/busdetails.php?bus_id=$bus_id">
+                        <a href="busdetails.php?bus_id=$bus_id">
                         <button class='btn btn-dark d-block btn-square'><i class='text-primary fi fi-br-angle-right md-32'></i></button>
                         </a>
                     </div>

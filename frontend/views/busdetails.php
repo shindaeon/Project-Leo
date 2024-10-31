@@ -28,6 +28,13 @@ if (isset($bus_id)) {
       $query->execute();
       $result = $query->get_result();
       $row = $result->fetch_assoc();
+      $passengers = json_decode($row['passengers']);
+      $available_seats = 0;
+      foreach ($passengers as $passenger) {
+            if ($passenger->status == 'available') {
+                  $available_seats++;
+            }
+      }
 } else {
       header('Location: ../index.php');
 }
@@ -116,7 +123,9 @@ $query->close();
             <div class="row">
                   <div class="col">
                         <h5 class="text-primary">Seats Available:</h5>
-                        <p>NN out of NN</p>
+                        <p>
+                              <?php echo $available_seats.' seats available'; ?>
+                        </p>
                   </div>
             </div>
             <div class="row fixed-bottom p-3">

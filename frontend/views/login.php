@@ -73,7 +73,7 @@ if (isset($_POST['btn_submit'])) {
                                                       </div>
                                                       <p class="text-dark text-center">
                                                             Don't have an account yet?
-                                                            <a href="">Sign Up</a>
+                                                            <a href="signup.php">Sign Up</a>
                                                       </p>
                                                 </div>
                                           </form>

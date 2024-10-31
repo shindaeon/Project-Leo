@@ -4,7 +4,7 @@ function NavBar($btn1_icon, $btn1_name, $btn2_icon, $btn2_name, $username, $full
   echo <<<HTML
     <script>
         function logout() {
-          fetch("controllers/logout_handler.php")
+          fetch("../controllers/logout_handler.php")
             .then((response) => response.text())
             .then((data) => {
               if (data == "success") {
@@ -33,7 +33,7 @@ function NavBar($btn1_icon, $btn1_name, $btn2_icon, $btn2_name, $username, $full
       <div class="offcanvas-header">
         <div class="row">
           <div class="col-3 align-content-center">
-            <img src="public/LogoRoundedSquare.png" alt="Logo" class="img-fluid" >
+            <img src="../public/LogoRoundedSquare.png" alt="Logo" class="img-fluid" >
           </div>
           <div class="col-6 align-content-center">
             <h2 class="offcanvas-title text-primary" id="offcanvasWithBothOptionsLabel">Menu</h2></div>
@@ -64,7 +64,7 @@ function NavBar($btn1_icon, $btn1_name, $btn2_icon, $btn2_name, $username, $full
       <div class="offcanvas-body">
           <div class="row">
             <div class=" d-flex col justify-content-center align-content-center">
-              <img src="public/LogoCircle.png" alt="Logo" class="img-fluid" >
+              <img src="../public/LogoCircle.png" alt="Logo" class="img-fluid" >
             </div>
           </div>
           <div class="row">
