@@ -14,7 +14,6 @@ if (isset($_POST['btn_submit'])) {
       $res = $query->get_result();
       if ($res->num_rows > 0) {
             $user = $res->fetch_assoc();
-            //add more session variables here, specifically username, fullname, email.
             $_SESSION['username'] = $user['username'];
             $_SESSION['full_name'] = $user['full_name'];
             $_SESSION['email'] = $user['email'];
@@ -49,9 +48,9 @@ if (isset($_POST['btn_submit'])) {
                         <img src="../public/LogoRoundedSquare.png" class="img-fluid" width="150" alt="">
                   </div>
             </div>
-            <div class="row p-1">
+            <div class="row">
                   <div class="col">
-                        <div class="fixed-bottom mx-3">
+                        <div class="mx-3">
                               <div class="row">
                                     <div class="col">
                                           <h1 class="text-center text-primary mb-3">Log in</h1>
@@ -64,7 +63,7 @@ if (isset($_POST['btn_submit'])) {
                                                       <label for="password" class="form-label">Your Password:</label>
                                                       <input type="password" class="form-control bg-primary border-0 p-2" id="password" name="password" required>
                                                 </div>
-                                                <div class="row bg-secondary p-3 rounded-top-5">
+                                                <div class="row position-sticky fixed-bottom bg-secondary p-3 rounded-top-5">
                                                       <div class="col d-flex justify-content-center">
                                                             <button class="btn bg-primary mb-3" type="submit" name="btn_submit">
                                                                   <i class="fi fi-br-sign-in-alt me-1"></i>

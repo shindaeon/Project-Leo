@@ -75,43 +75,7 @@
       <!-- Include Popper.js and Bootstrap JavaScript -->
       <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
       <script src="../src/js/bootstrap/bootstrap.js"></script>
-      <script>
-            const btn_signup = document.getElementById('btn_signup');
-            btn_signup.addEventListener('click', (e) => {
-                  e.preventDefault;
-                  const fullname = document.getElementById('fullname').value;
-                  const username = document.getElementById('username').value;
-                  const email = document.getElementById('email').value;
-                  const password = document.getElementById('password').value;
-                  const repassword = document.getElementById('repassword').value;
-                  if (password != repassword) {
-                        alert('Passwords do not match');
-                        return;
-                  }
-                  if (fullname == '' || username == '' || email == '' || password == '' || repassword == '') {
-                        alert('Please fill in all fields');
-                        return;
-                  } else {
-                        fetch('../controllers/signup.php', {
-                                    method: 'POST',
-                                    headers: {
-                                          'Content-Type': 'application/json'
-                                    },
-                                    body: JSON.stringify({
-                                          fullname: fullname,
-                                          username: username,
-                                          email: email,
-                                          password: password
-                                    })
-                              }).then(response => response.text())
-                              .then(data => {
-                                    alert(data);
-                              }).catch(
-                                    
-                              )
-                  }
-            })
-      </script>
+      <script src="../src/js/signup.js"></script>
 </body>
 
 </html>

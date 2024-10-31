@@ -13,6 +13,7 @@ $query->execute();
 $res = $query->get_result();
 if ($res->num_rows > 0) {
       echo 'Username already exists, Try another one';
+      
       exit();
 } else {
       $signup_query = $dbConnection->prepare('INSERT INTO users (full_name, username, email, password) VALUES (?, ?, ?, ?)');
