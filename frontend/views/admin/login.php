@@ -1,3 +1,34 @@
+<?php
+include '../../controllers/dbConfig.php';
+session_start();
+if (isset($_SESSION['emp_username'])) {
+      header('Location: busmanager.php');
+}
+if (isset($_POST['btn_submit'])) {
+      $emp_username = $_POST['username'];
+      $emp_password = $_POST['password'];
+      $query = $dbConnection->prepare("SELECT * FROM cashiers WHERE username = ? AND password = ?");
+      $query->bind_param('ss', $emp_username, $emp_password);
+
+      $query->execute();
+      $res = $query->get_result();
+      if ($res->num_rows > 0) {
+            $user = $res->fetch_assoc();
+            $_SESSION['emp_username'] = $user['username'];
+            $_SESSION['emp_full_name'] = $user['cashier_name'];
+            if ($user['current_terminal_session'] != NULL){
+                  $_SESSION['terminal_session_id'] = $user['current_terminal_session'];
+                  header('Location: dashboard.php');
+            } else {
+                  header('Location: busmanager.php');
+            }
+      } else {
+            echo '<script>alert("Invalid username or password")</script>';
+      }
+      $dbConnection->close();
+      $query->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +45,7 @@
 </head>
 
 <body class="bg-primary">
-<div class="container">
+      <div class="container">
             <div class="row">
                   <div class="col d-flex justify-content-center my-5 py-3">
                         <img src="../../public/LogoRoundedSquare.png" class="img-fluid" width="150" alt="">
@@ -26,7 +57,7 @@
                               <div class="row">
                                     <div class="col">
                                           <h1 class="text-center text-dark mb-3">Admin Log in</h1>
-                                          <form method="POST">
+                                          <form method="POST" action="">
                                                 <div class="mb-3 px-5">
                                                       <label for="username" class="form-label text-dark">Your Username:</label>
                                                       <input type="text" class="form-control bg-dark text-light border-0 p-2" id="username" name="username" required>

@@ -63,7 +63,8 @@ if (isset($_POST['btn_submit'])) {
                                                       <label for="password" class="form-label">Your Password:</label>
                                                       <input type="password" class="form-control bg-primary border-0 p-2" id="password" name="password" required>
                                                 </div>
-                                                <div class="row position-sticky fixed-bottom bg-secondary p-3 rounded-top-5">
+                                                <div class="p-5 m-5"></div>
+                                                <div class="row position-fixed fixed-bottom bg-secondary p-3 mx-2 rounded-top-5">
                                                       <div class="col d-flex justify-content-center">
                                                             <button class="btn bg-primary mb-3" type="submit" name="btn_submit">
                                                                   <i class="fi fi-br-sign-in-alt me-1"></i>

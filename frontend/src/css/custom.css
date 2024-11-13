@@ -20,6 +20,10 @@ body{
       background-color: var(--muted);
 }
 
+.text-grey{
+      color: #5e5e5e;
+}
+
 button.btn.btn-nav {
       border-radius: 10rem;
       padding: 0.25rem 0.75rem;

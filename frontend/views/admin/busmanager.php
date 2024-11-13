@@ -1,3 +1,31 @@
+<?php
+include '../../controllers/dbConfig.php';
+session_start();
+if (!isset($_SESSION['emp_username'])) {
+      header('Location: login.php');
+}
+if (isset($_POST['btn_submit'])) {
+      $plate_number = $_POST['plate_number'];
+      $bus_key = $_POST['bus_key'];
+      $query = $dbConnection->prepare("SELECT * FROM buses WHERE bus_plate_number = ? AND bus_key = ?");
+      $query->bind_param('ss', $plate_number, $bus_key);
+
+      $query->execute();
+      $res = $query->get_result();
+      if ($res->num_rows > 0) {
+            $bus = $res->fetch_assoc();
+            //check if current session is not null from db
+            //if null redirect to create terminal session.php
+            //else redirect to dashboard.php
+      } else {
+            echo '<script>alert("Invalid plate number or bus key")</script>';
+      }
+      $dbConnection->close();
+      $query->close();
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +45,10 @@
       <div class='container-fluid p-2 bg-primary position-sticky fixed-top'>
             <div class='row'>
                   <div class='col d-flex align-items-center'>
-                        <button class='btn btn-primary btn-nav'><i class="fi fi-br-user"></i> Cashier 1</button>
+                        <span class="text-dark mx-2">
+                              <i class="fi fi-br-user"></i>
+                              <?php echo $_SESSION['emp_full_name']; ?>
+                        </span>
                   </div>
                   <div class='col d-flex justify-content-end align-items-center'>
                         <button class='btn btn-secondary btn-nav'><i class="fi fi-br-sign-out-alt me-2"></i>Logout</button>
@@ -30,15 +61,10 @@
       </div>
       <div class="container">
             <div class="d-flex rounded-5 justify-content-center align-content-center p-3 bg-secondary">
-                  <form action="">
+                  <form action="" method="POST">
                         <div class="form-group my-3">
                               <label for="plate_number" class="form-label">Plate Number:</label>
                               <input type="text" class="form-control bg-dark text-light" name="plate_number" required>
-                        </div>
-
-                        <div class="form-group my-3">
-                              <label for="bus_code" class="form-label">Bus Code:</label>
-                              <input type="text" class="form-control bg-dark text-light" name="bus_code" required>
                         </div>
 
                         <div class="form-group my-3">
@@ -48,7 +74,7 @@
 
             </div>
             <div class="d-flex justify-content-center p-3">
-                  <button class="btn btn-primary"><i class="fi fi-br-check-circle me-2"></i>Submit</button>
+                  <button class="btn btn-primary" type="submit" name="btn_submit"><i class="fi fi-br-check-circle me-2"></i>Submit</button>
             </div>
             </form>
       </div>
