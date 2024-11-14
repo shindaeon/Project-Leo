@@ -3,11 +3,11 @@ session_start();
 if (!isset($_SESSION['emp_username'])) {
       header('Location: login.php');
 }
-if (!isset($_SESSION['terminal_session_id'])) {
+if (!isset($_SESSION['bus_plate_number'])) {
       header('Location: busmanager.php');
 }
 include '../../controllers/dbConfig.php';
-if(isset($_POST['btn_submit']) && isset($_SESSION['bus_plate_number'])){
+if (isset($_POST['btn_submit']) && isset($_SESSION['bus_plate_number'])) {
       $destination = $_POST['destination'];
       $terminal_location = $_POST['terminal_location'];
       $departing_time = $_POST['departing_time'];
@@ -16,7 +16,7 @@ if(isset($_POST['btn_submit']) && isset($_SESSION['bus_plate_number'])){
       $bus_status = "NOW BOARDING";
       $number_of_seats = $_POST['seats'];
       $seats = [];
-      for ($i = 0; $i < $number_of_seats; $i++) {
+      for ($i = 1; $i <= $number_of_seats; $i++) {
             $seats[$i] = [
                   "status" => "available",
                   "ticket" => null,
@@ -25,8 +25,6 @@ if(isset($_POST['btn_submit']) && isset($_SESSION['bus_plate_number'])){
             ];
       }
       $seats_json = json_encode($seats);
-
-
 
       $query = $dbConnection->prepare("INSERT INTO terminal_sessions (destination, terminal_location, departing_time, expiration_date, fare_price, passengers, bus_status) VALUES (?, ?, ?, ?, ?, ?, ?)");
       $query->bind_param('sssssss', $destination, $terminal_location, $departing_time, $expiration_date, $fare_price, $seats_json, $bus_status);
@@ -61,7 +59,9 @@ if(isset($_POST['btn_submit']) && isset($_SESSION['bus_plate_number'])){
       <div class='container-fluid p-2 bg-primary position-sticky fixed-top'>
             <div class='row'>
                   <div class='col d-flex align-items-center'>
-                        <button class='btn btn-secondary btn-nav'><i class="fi fi-br-angle-left me-2"></i>Back</button>
+                        <a href="../admin/busmanager.php">
+                              <button class='btn btn-secondary btn-nav'><i class="fi fi-br-angle-left me-2"></i>Back</button>
+                        </a>
                   </div>
                   <div class='col d-flex justify-content-end align-items-center'>
                         <button class='btn btn-secondary btn-nav' onclick="logout()"><i class="fi fi-br-sign-out-alt me-2"></i>Logout</button>
@@ -69,7 +69,13 @@ if(isset($_POST['btn_submit']) && isset($_SESSION['bus_plate_number'])){
             </div>
       </div>
       <h1 class="text-primary pt-3 px-3">New Terminal Session</h1>
-      <p class="pb-3 px-3">Set up a new session for your bus to be visible on the Bus Finder</p>
+      <p class="pb-3 px-3">
+            Set up a new session for your bus
+            <span class="text-primary">
+                  <u><?php echo $_SESSION['bus_plate_number']; ?></u>
+            </span>
+            to be visible on the Bus Finder
+      </p>
       <div class="container">
             <div class="d-flex rounded-5 justify-content-center align-content-center p-3 bg-secondary">
                   <form method="POST" action="">
@@ -108,6 +114,22 @@ if(isset($_POST['btn_submit']) && isset($_SESSION['bus_plate_number'])){
             <!-- Include Popper.js and Bootstrap JavaScript -->
             <script src="../../node_modules/@popperjs/core/dist/umd/popper.js"></script>
             <script src="../../src/js/bootstrap/bootstrap.js"></script>
+            <script>
+                  function logout() {
+                        fetch("../../controllers/logout_handler.php")
+                              .then((response) => response.text())
+                              .then((data) => {
+                                    if (data == "success") {
+                                          window.location.href = "/Project-Leo/frontend/views/admin/login.php";
+                                    } else {
+                                          alert(
+                                                "There seems to be an issue logging you out. Please try again later."
+                                          );
+                                          console.log(data);
+                                    }
+                              });
+                  }
+            </script>
 </body>
 
 </html>

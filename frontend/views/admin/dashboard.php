@@ -48,14 +48,13 @@ if ($res->num_rows > 0) {
       $total_seats = 0;
       $scanned_tickets = 0;
       foreach ($passengers as $passenger) {
-            if ($passenger->status == 'taken') {
+            if ($passenger->status == 'reserved') {
                   $booked_passengers++;
-            } elseif ($passenger->status == 'scanned') {
+            } elseif ($passenger->status == 'taken') {
                   $scanned_tickets++;
             }
             $total_seats++;
       }
-
 }
 
 
@@ -79,7 +78,9 @@ if ($res->num_rows > 0) {
       <div class='container-fluid p-2 bg-primary position-sticky fixed-top'>
             <div class='row'>
                   <div class='col d-flex align-items-center'>
-                        <button class='btn btn-secondary btn-nav'><i class="fi fi-br-cross me-2"></i>Exit</button>
+                        <a href="../admin/busmanager.php">
+                         <button class='btn btn-secondary btn-nav'><i class="fi fi-br-cross me-2"></i>Exit</button>
+                        </a>
                   </div>
                   <div class='col d-flex justify-content-end align-items-center'>
                         <button class='btn btn-secondary btn-nav' onclick="logout()"><i class="fi fi-br-sign-out-alt me-2"></i>Logout</button>
@@ -100,8 +101,8 @@ if ($res->num_rows > 0) {
       <div class="container">
             <?php
             include '../../src/components/dashboardcard.php';
-            DashboardCard('Destination', $destination, 'Booked Passengers', $booked_passengers." out of ".$total_seats);
-            DashboardCard('Boarding Status', $bus_status, 'Scanned Tickets', $scanned_tickets.' out of '.$booked_passengers);
+            DashboardCard('Destination', $destination, 'Booked Passengers', $booked_passengers . " out of " . $total_seats);
+            DashboardCard('Boarding Status', $bus_status, 'Scanned Tickets', $scanned_tickets . ' out of ' . $booked_passengers);
             ?>
       </div>
 
@@ -116,7 +117,11 @@ if ($res->num_rows > 0) {
             </div>
             <div class="row">
                   <div class="col text-center">
-                        <span class="text-grey"><i>Terminal Session ID: $terminal_session_id</i></span>
+                        <span class="text-grey"><i>Terminal Session ID:
+                                    <?php
+                                    echo $terminal_session_id;
+                                    ?>
+                              </i></span>
                   </div>
             </div>
       </div>

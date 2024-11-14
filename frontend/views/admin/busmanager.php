@@ -18,18 +18,22 @@ if (isset($_POST['btn_submit'])) {
             if ($bus['current_terminal_session'] != NULL || $bus['current_terminal_session'] != '') {
                   $_SESSION['terminal_session_id'] = $bus['current_terminal_session'];
                   header('Location: dashboard.php');
-            } else {
-                  $_SESSION['bus_plate_number'] = $bus['bus_plate_number'];
-                  header('Location: newsession.php');
+                  exit();
             }
+            $_SESSION['bus_plate_number'] = $bus['bus_plate_number'];
+            header('Location: newsession.php');
+
+
             //if null redirect to create terminal session.php
             //else redirect to dashboard.php
+            exit();
       } else {
             echo '<script>alert("Invalid plate number or bus key")</script>';
       }
       $dbConnection->close();
       $query->close();
 }
+unset($_SESSION['bus_plate_number'], $_SESSION['terminal_session_id']);
 
 
 ?>
@@ -58,7 +62,7 @@ if (isset($_POST['btn_submit'])) {
                         </span>
                   </div>
                   <div class='col d-flex justify-content-end align-items-center'>
-                        <button class='btn btn-secondary btn-nav'><i class="fi fi-br-sign-out-alt me-2"></i>Logout</button>
+                        <button onclick="logout()" class='btn btn-secondary btn-nav'><i class="fi fi-br-sign-out-alt me-2"></i>Logout</button>
                   </div>
             </div>
       </div>
@@ -83,7 +87,34 @@ if (isset($_POST['btn_submit'])) {
             <div class="d-flex justify-content-center p-3">
                   <button class="btn btn-primary" type="submit" name="btn_submit"><i class="fi fi-br-check-circle me-2"></i>Submit</button>
             </div>
+            <p class="text-center">If the bus is not on the system yet, you can <a class="text-primary" type="button" data-bs-toggle="modal" data-bs-target="#newBus"><u>Add a Bus</u></a></p>
+
             </form>
+      </div>
+
+      <div class="modal fade" id="newBus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                  <div class="modal-content">
+                        <div class="modal-header bg-primary text-dark border-0">
+                              <h3 class="modal-title" id="staticBackdropLabel">Add a Bus</h3>
+                              <button class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                        </div>
+                        <div class="modal-body bg-dark text-light">
+                              <form action="" method="POST">
+                                    <div class="form-group">
+                                          <label for="" class="form-label">Text:</label>
+                                          <input type="text" name="" class="form-control">
+                                    </div>
+                              
+                        </div>
+                        <div class="modal-footer bg-primary text-dark border-0">
+                              <button class="btn btn-danger">Cancel</button>
+                              <button class="btn btn-success">Add Bus</button>
+                              </form>
+                        </div>
+                  </div>
+            </div>
+
       </div>
 
 
@@ -91,6 +122,22 @@ if (isset($_POST['btn_submit'])) {
       <!-- Include Popper.js and Bootstrap JavaScript -->
       <script src="../../node_modules/@popperjs/core/dist/umd/popper.js"></script>
       <script src="../../src/js/bootstrap/bootstrap.js"></script>
+      <script>
+            function logout() {
+                  fetch("../../controllers/logout_handler.php")
+                        .then((response) => response.text())
+                        .then((data) => {
+                              if (data == "success") {
+                                    window.location.href = "/Project-Leo/frontend/views/admin/login.php";
+                              } else {
+                                    alert(
+                                          "There seems to be an issue logging you out. Please try again later."
+                                    );
+                                    console.log(data);
+                              }
+                        });
+            }
+      </script>
 </body>
 
 </html>

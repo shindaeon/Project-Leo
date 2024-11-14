@@ -1,0 +1,92 @@
+[
+      {
+            "status": "available",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 0
+      },
+      {
+            "status": "reserved",
+            "ticket": "9003-TSTBS3-PS1",
+            "username": "test",
+            "seatNumber": 1
+      },
+      {
+            "status": "reserved",
+            "ticket": "9003-TSTBS3-PS2",
+            "username": "test",
+            "seatNumber": 2
+      },
+      {
+            "status": "reserved",
+            "ticket": "9003-TSTBS3-PS3",
+            "username": "test",
+            "seatNumber": 3
+      },
+      {
+            "status": "available",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 4
+      },
+      {
+            "status": "available",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 5
+      },
+      {
+            "status": "available",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 6
+      },
+      {
+            "status": "available",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 7
+      },
+      {
+            "status": "reserved",
+            "ticket": "9003-TSTBS3-PS8",
+            "username": "test",
+            "seatNumber": 8
+      },
+      {
+            "status": "reserved",
+            "ticket": "9003-TSTBS3-PS9",
+            "username": "test",
+            "seatNumber": 9
+      },
+      {
+            "status": "available",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 10
+      },
+      {
+            "status": "available",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 11
+      },
+      {
+            "status": "reserved",
+            "ticket": "9003-TSTBS3-PS12",
+            "username": "test",
+            "seatNumber": 12
+      },
+      {
+            "status": "available",
+            "ticket": null,
+            "username": null,
+            "seatNumber": 13
+      },
+      {
+            "status": "reserved",
+            "ticket": "9003-TSTBS3-PS14",
+            "username": "test",
+            "seatNumber": 14
+      }
+]
