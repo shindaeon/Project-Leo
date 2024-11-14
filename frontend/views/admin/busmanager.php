@@ -12,9 +12,16 @@ if (isset($_POST['btn_submit'])) {
 
       $query->execute();
       $res = $query->get_result();
+      $bus = $res->fetch_assoc();
       if ($res->num_rows > 0) {
-            $bus = $res->fetch_assoc();
             //check if current session is not null from db
+            if ($bus['current_terminal_session'] != NULL || $bus['current_terminal_session'] != '') {
+                  $_SESSION['terminal_session_id'] = $bus['current_terminal_session'];
+                  header('Location: dashboard.php');
+            } else {
+                  $_SESSION['bus_plate_number'] = $bus['bus_plate_number'];
+                  header('Location: newsession.php');
+            }
             //if null redirect to create terminal session.php
             //else redirect to dashboard.php
       } else {

@@ -2,7 +2,61 @@
 session_start();
 if (!isset($_SESSION['emp_username'])) {
       header('Location: login.php');
-} 
+}
+if (!isset($_SESSION['terminal_session_id'])) {
+      header('Location: busmanager.php');
+}
+$terminal_session_id = $_SESSION['terminal_session_id'];
+include '../../controllers/dbConfig.php';
+$query = $dbConnection->prepare("
+      SELECT 
+            buses.bus_number,
+            buses.bus_plate_number,
+            buses.bus_company_name,
+            terminal_sessions.session_id,
+            terminal_sessions.destination,
+            terminal_sessions.departing_time,
+            terminal_sessions.passengers,
+            terminal_sessions.bus_status,
+            terminal_sessions.fare_price,
+            terminal_sessions.terminal_location
+      FROM 
+            buses
+      INNER JOIN 
+            terminal_sessions 
+      ON 
+            terminal_sessions.session_id = buses.current_terminal_session
+      WHERE
+            terminal_sessions.session_id = ?;
+");
+$query->bind_param('s', $terminal_session_id);
+$query->execute();
+$res = $query->get_result();
+if ($res->num_rows > 0) {
+      $session = $res->fetch_assoc();
+      $currentbus = $session['bus_company_name'];
+      $bus_number = $session['bus_number'];
+      $plate_number = $session['bus_plate_number'];
+      $destination = $session['destination'];
+      $departing_time = $session['departing_time'];
+      $passengers = json_decode($session['passengers']);
+      $bus_status = $session['bus_status'];
+      $fare_price = $session['fare_price'];
+
+      //count booked passengers and scanned tickets
+      $booked_passengers = 0;
+      $total_seats = 0;
+      $scanned_tickets = 0;
+      foreach ($passengers as $passenger) {
+            if ($passenger->status == 'taken') {
+                  $booked_passengers++;
+            } elseif ($passenger->status == 'scanned') {
+                  $scanned_tickets++;
+            }
+            $total_seats++;
+      }
+
+}
 
 
 ?>
@@ -25,7 +79,7 @@ if (!isset($_SESSION['emp_username'])) {
       <div class='container-fluid p-2 bg-primary position-sticky fixed-top'>
             <div class='row'>
                   <div class='col d-flex align-items-center'>
-                        <button class='btn btn-secondary btn-nav'><i class="fi fi-br-angle-left me-2"></i>Back</button>
+                        <button class='btn btn-secondary btn-nav'><i class="fi fi-br-cross me-2"></i>Exit</button>
                   </div>
                   <div class='col d-flex justify-content-end align-items-center'>
                         <button class='btn btn-secondary btn-nav' onclick="logout()"><i class="fi fi-br-sign-out-alt me-2"></i>Logout</button>
@@ -34,14 +88,20 @@ if (!isset($_SESSION['emp_username'])) {
       </div>
       <div class="container p-3">
             <h1 class="text-primary">Dashboard</h1>
-            <p>Now Managing: <br> <span class="h5">$currentbus #$bus_number ($plate_number)</span></p>
+            <p>Now Managing: <br>
+                  <span class="h5">
+                        <?php
+                        echo "$currentbus #$bus_number ($plate_number)";
+                        ?>
+                  </span>
+            </p>
 
       </div>
       <div class="container">
             <?php
             include '../../src/components/dashboardcard.php';
-            DashboardCard('Destination', 'Bayombong', 'Booked Passengers', '10 out of 10');
-            DashboardCard('Boarding Status', 'Now Boarding', 'Scanned Tickets', '10 out of 10');
+            DashboardCard('Destination', $destination, 'Booked Passengers', $booked_passengers." out of ".$total_seats);
+            DashboardCard('Boarding Status', $bus_status, 'Scanned Tickets', $scanned_tickets.' out of '.$booked_passengers);
             ?>
       </div>
 

@@ -32,6 +32,7 @@ if (isset($bus_id)) {
       $passengers = json_decode($row['passengers']);
 } else {
       header('Location: ../index.php');
+      exit();
 }
 $query->close();
 ?>
@@ -112,6 +113,7 @@ $query->close();
                         $updateQuery->bind_param('si', $updated_passengers, $row['session_id']);
                         $updateQuery->execute();
                         if ($updateQuery->affected_rows > 0) {
+                              ob_start();
                               $receiptData = [
                                     'barcode' => $barcode,
                                     'destination' => $row['destination'],
@@ -127,6 +129,7 @@ $query->close();
                               ];
                               $_SESSION['receiptData'] = $receiptData;
                               header('Location: ../views/receipt.php');
+                              ob_end_flush();
                         } else {
                               echo "<script>alert('Failed to reserve seat $selected_seat!')</script>";
                         }
