@@ -72,9 +72,7 @@ if (isset($_POST['btn_submit']) && isset($_SESSION['bus_plate_number'])) {
       <p class="pb-3 px-3">
             Set up a new session for your bus
             <span class="text-primary">
-                  <u><?php echo $_SESSION['bus_plate_number']; ?></u>
-            </span>
-            to be visible on the Bus Finder
+                  <u><?php echo $_SESSION['bus_plate_number']; ?></u></span>, so it will be visible on the Bus Finder
       </p>
       <div class="container">
             <div class="d-flex rounded-5 justify-content-center align-content-center p-3 bg-secondary">
@@ -97,11 +95,11 @@ if (isset($_POST['btn_submit']) && isset($_SESSION['bus_plate_number'])) {
                         </div>
                         <div class="form-group my-2">
                               <label for="fare_price" class="form-label">Set Fare Price:</label>
-                              <input type="number" name="fare_price" class="form-control" required>
+                              <input type="number" name="fare_price" class="form-control" min="1" pattern="^\d+(\.\d{1,2})?$" step="0.25" required>
                         </div>
                         <div class="form-group my-2">
                               <label for="seats" class="form-label">Set Number of Seats:</label>
-                              <input type="number" name="seats" class="form-control" required>
+                              <input type="number" name="seats" class="form-control" min="1" max="85" required>
                         </div>
 
             </div>

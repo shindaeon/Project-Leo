@@ -67,29 +67,38 @@ unset($_SESSION['bus_plate_number'], $_SESSION['terminal_session_id']);
             </div>
       </div>
 
-      <div class="mt-3 d-flex align-content-center justify-content-center">
-            <h1>Enter Bus Credentials to Manage</h1>
-      </div>
-      <div class="container">
-            <div class="d-flex rounded-5 justify-content-center align-content-center p-3 bg-secondary">
-                  <form action="" method="POST">
-                        <div class="form-group my-3">
-                              <label for="plate_number" class="form-label">Plate Number:</label>
-                              <input type="text" class="form-control bg-dark text-light" name="plate_number" required>
+      <div class="d-flex" style="height:85vh;">
+            <div class="container my-auto">
+                  <div class="d-flex flex-column align-items-center justify-content-center">
+                        <h2 class="text-center text-primary mb-3">Enter Bus Credentials to Manage</h2>
+                        <div class="container">
+                              <div class="d-flex rounded-5 justify-content-center align-content-center p-3 bg-secondary">
+                                    <form action="" method="POST">
+                                          <div class="form-group my-3">
+                                                <label for="plate_number" class="form-label">Plate Number:</label>
+                                                <input type="text" class="form-control bg-dark text-light" name="plate_number" required>
+                                          </div>
+                                          <div class="form-group my-3">
+                                                <label for="bus_key">Bus Key:</label>
+                                                <input type="password" class="form-control bg-dark text-light" name="bus_key">
+                                          </div>
+                              </div>
                         </div>
-
-                        <div class="form-group my-3">
-                              <label for="bus_key">Bus Key:</label>
-                              <input type="password" class="form-control bg-dark text-light" name="bus_key">
+                        <div class="container">
+                              <div class="d-flex justify-content-center p-3">
+                                    <button class="btn btn-primary" type="submit" name="btn_submit">
+                                          <i class="fi fi-br-check-circle me-2"></i>Submit
+                                    </button>
+                              </div>
+                              <p class="text-center">If the bus is not on the system yet, you can
+                                    <a class="text-primary" type="button" data-bs-toggle="modal" data-bs-target="#newBus">
+                                          <u>Add a Bus</u>
+                                    </a>
+                              </p>
                         </div>
-
+                        </form>
+                  </div>
             </div>
-            <div class="d-flex justify-content-center p-3">
-                  <button class="btn btn-primary" type="submit" name="btn_submit"><i class="fi fi-br-check-circle me-2"></i>Submit</button>
-            </div>
-            <p class="text-center">If the bus is not on the system yet, you can <a class="text-primary" type="button" data-bs-toggle="modal" data-bs-target="#newBus"><u>Add a Bus</u></a></p>
-
-            </form>
       </div>
 
       <div class="modal fade" id="newBus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -101,14 +110,37 @@ unset($_SESSION['bus_plate_number'], $_SESSION['terminal_session_id']);
                         </div>
                         <div class="modal-body bg-dark text-light">
                               <form action="" method="POST">
-                                    <div class="form-group">
-                                          <label for="" class="form-label">Text:</label>
-                                          <input type="text" name="" class="form-control">
+                                    <div class="form-group my-2 mx-1">
+                                          <label for="bus_company_name" class="form-label">Bus Company Name:</label>
+                                          <input type="text" name="bus_company_name" class="form-control" placeholder="Bus Liner Inc." required>
                                     </div>
-                              
+                                    <div class="form-group my-2 mx-1">
+                                          <label for="bus_number" class="form-label">Bus Number:</label>
+                                          <input type="number" name="bus_number" class="form-control" placeholder="01" maxlength="3" required>
+                                    </div>
+                                    <div class="form-group my-2 mx-1">
+                                          <label for="bus_plate_number" class="form-label">Bus Plate Number:</label>
+                                          <input type="text" name="bus_plate_number" class="form-control" placeholder="XXXX-1234" maxlength="9" required>
+                                    </div>
+                                    <div class="form-group my-2 mx-1">
+                                          <label for="bus_company_initials" class="form-label">Bus Company Initials:</label>
+                                          <input type="text" name="bus_company_initials" class="form-control" placeholder="BSLI" maxlength="5" minlength="2" required>
+                                    </div>
+                                    <div class="form-group my-2 mx-1">
+                                          <label for="bus_type" class="form-label">Bus Type:</label>
+                                          <select name="bus_type" id="" class="form-select" required>
+                                                <option value="Regular">Regular</option>
+                                                <option value="Air-conditioned">Air-conditioned</option>
+                                          </select>
+                                    </div>
+                                    <div class="form-group my-2 mx-1">
+                                          <label for="bus_key" class="form-label">Bus Key:</label>
+                                          <input type="password" name="bus_key" class="form-control" minlength="8" required>
+                                    </div>
+
                         </div>
                         <div class="modal-footer bg-primary text-dark border-0">
-                              <button class="btn btn-danger">Cancel</button>
+                              <button class="btn btn-danger" data-bs-dismiss="modal" aria-label="close">Cancel</button>
                               <button class="btn btn-success">Add Bus</button>
                               </form>
                         </div>
