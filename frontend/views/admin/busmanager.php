@@ -101,6 +101,28 @@ unset($_SESSION['bus_plate_number'], $_SESSION['terminal_session_id']);
             </div>
       </div>
 
+      <?php
+            if(isset($_POST['btn_add'])){
+                  $bus_company_name = $_POST['bus_company_name'];
+                  $bus_number = $_POST['bus_number'];
+                  $bus_plate_number = $_POST['bus_plate_number'];
+                  $bus_company_initials = $_POST['bus_company_initials'];
+                  $bus_type = $_POST['bus_type'];
+                  $bus_key = $_POST['bus_key'];
+
+                  $query = $dbConnection->prepare("INSERT INTO buses (bus_company_name, bus_number, bus_plate_number, bus_company_initials, bus_type, bus_key) VALUES (?, ?, ?, ?, ?, ?)");
+                  $query->bind_param('ssssss', $bus_company_name, $bus_number, $bus_plate_number, $bus_company_initials, $bus_type, $bus_key);
+                  $query->execute();
+                  $dbConnection->close();
+                  $query->close();
+                  if ($query) {
+                        echo '<script>alert("Bus added successfully")</script>';
+                  } else {
+                        echo '<script>alert("Failed to add bus")</script>';
+                  }
+            }
+      ?>
+
       <div class="modal fade" id="newBus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                   <div class="modal-content">
@@ -141,7 +163,7 @@ unset($_SESSION['bus_plate_number'], $_SESSION['terminal_session_id']);
                         </div>
                         <div class="modal-footer bg-primary text-dark border-0">
                               <button class="btn btn-danger" data-bs-dismiss="modal" aria-label="close">Cancel</button>
-                              <button class="btn btn-success">Add Bus</button>
+                              <button class="btn btn-success" name="btn_add">Add Bus</button>
                               </form>
                         </div>
                   </div>
