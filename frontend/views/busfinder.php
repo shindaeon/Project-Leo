@@ -67,7 +67,9 @@ $_SESSION['receiptData'] = null;
     INNER JOIN 
       terminal_sessions 
     ON 
-      buses.current_terminal_session = terminal_sessions.session_id;
+      buses.current_terminal_session = terminal_sessions.session_id
+    WHERE
+      terminal_sessions.bus_status = 'NOW BOARDING';
   ");
     $query->execute();
     $result = $query->get_result();

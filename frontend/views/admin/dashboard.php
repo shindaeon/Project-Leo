@@ -3,9 +3,13 @@ session_start();
 if (!isset($_SESSION['emp_username'])) {
       header('Location: login.php');
 }
+if ($_SESSION['terminal_session_id'] == 0) {
+      header('Location: newsession.php');
+}
 if (!isset($_SESSION['terminal_session_id'])) {
       header('Location: busmanager.php');
 }
+
 $terminal_session_id = $_SESSION['terminal_session_id'];
 include '../../controllers/dbConfig.php';
 $query = $dbConnection->prepare("
@@ -149,8 +153,8 @@ if ($res->num_rows > 0) {
             <div class="offcanvas-body">
                   <ul class="list-unstyled">
                         <li class="h4 p-2"><a href="../admin/editsession.php"><i class="fi fi-br-customize me-3"></i>Edit Terminal Session</a></li>
-                        <li class="h4 p-2"><a href=""><i class="fi fi-br-trash me-3"></i>Delete Terminal Session</a></li>
-                        <li class="h4 p-2"><a href="" onclick="logout()" role="button"><i class="fi fi-br-sign-out-alt me-3"></i>Logout</a></li>
+                        <li class="h4 p-2"><a class="text-primary" onclick="deleteSession()" role="button"><i class="fi fi-br-trash me-3"></i>Delete Terminal Session</a></li>
+                        <li class="h4 p-2"><a class="text-primary" onclick="logout()" role="button"><i class="fi fi-br-sign-out-alt me-3"></i>Logout</a></li>
                   </ul>
             </div>
       </div>
@@ -162,16 +166,16 @@ if ($res->num_rows > 0) {
                               <h3 class="modal-title">Edit Boarding Status</h3>
                         </div>
                         <div class="modal-body bg-dark text-light">
-                              <?php 
-                              if(isset($_POST['btn_save'])){
+                              <?php
+                              if (isset($_POST['btn_save'])) {
                                     $bus_status = $_POST['bus_status'];
                                     $query = $dbConnection->prepare("UPDATE terminal_sessions SET bus_status = ? WHERE session_id = ?");
                                     $query->bind_param('ss', $bus_status, $terminal_session_id);
                                     $query->execute();
-                                    if($query->affected_rows > 0){
+                                    if ($query->affected_rows > 0) {
                                           echo "<script>alert('Updated Successfully');</script>";
                                           echo "<script>window.location.href = 'dashboard.php';</script>";
-                                    }else{
+                                    } else {
                                           echo "<script>alert('Oops... Something is wrong.'); </script>";
                                     }
                               }
@@ -200,18 +204,46 @@ if ($res->num_rows > 0) {
       <script src="../../src/js/bootstrap/bootstrap.js"></script>
       <script>
             function logout() {
-                  fetch("../../controllers/logout_handler.php")
-                        .then((response) => response.text())
-                        .then((data) => {
-                              if (data == "success") {
-                                    window.location.href = "/Project-Leo/frontend/views/admin/login.php";
-                              } else {
-                                    alert(
-                                          "There seems to be an issue logging you out. Please try again later."
-                                    );
-                                    console.log(data);
-                              }
-                        });
+                  try {
+                        fetch("/Project-Leo/frontend/controllers/logout_handler.php", {
+                                    method: "POST",
+                              })
+                              .then((response) => response.text())
+                              .then((data) => {
+                                    if (data == "success") {
+                                          window.location.href = "/Project-Leo/frontend/views/admin/login.php";
+                                    } else {
+                                          alert(
+                                                "There seems to be an issue logging you out. Please try again later."
+                                          );
+                                          console.log(data);
+                                    }
+                              }).catch((error) => {
+                                    console.log(error);
+                              });
+                  } catch (error) {
+                        console.log(error);
+                  }
+            }
+
+            function deleteSession() {
+                  if (confirm("Are you sure you want to delete this session? This action cannot be undone.")) {
+                        fetch("../../controllers/deleteTerminalSession.php")
+                              .then((response) => response.text())
+                              .then((data) => {
+                                    if (data == "success") {
+                                          alert("Session deleted successfully.");
+                                          window.location.href = "/Project-Leo/frontend/views/admin/busmanager.php";
+                                    } else {
+                                          alert(
+                                                "There seems to be an issue deleting the session. Please try again later."
+                                          );
+                                          console.log(data);
+                                    }
+                              });
+                  } else {
+                        console.log("Cancelled");
+                  }
             }
       </script>
 </body>

@@ -15,7 +15,7 @@ if (isset($_POST['btn_submit'])) {
       $bus = $res->fetch_assoc();
       if ($res->num_rows > 0) {
             //check if current session is not null from db
-            if ($bus['current_terminal_session'] != NULL || $bus['current_terminal_session'] != '') {
+            if ($bus['current_terminal_session'] != NULL || $bus['current_terminal_session'] != 0) {
                   $_SESSION['terminal_session_id'] = $bus['current_terminal_session'];
                   header('Location: dashboard.php');
                   exit();

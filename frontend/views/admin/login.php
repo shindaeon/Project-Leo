@@ -4,6 +4,7 @@ session_start();
 if (isset($_SESSION['emp_username'])) {
       header('Location: busmanager.php');
 }
+
 if (isset($_POST['btn_submit'])) {
       $emp_username = $_POST['username'];
       $emp_password = $_POST['password'];
