@@ -9,7 +9,7 @@ $_SESSION['receiptData'] = null;
 <head>
   <title>Project Leoforeio</title>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="public/LogoCircle.png" />
+  <link rel="icon" type="image/svg+xml" href="../public/LogoCircle.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../src/css/bootstrap/bootstrap.css" />
   <link rel="stylesheet" href="../src/css/typography.css" />
@@ -93,7 +93,22 @@ $_SESSION['receiptData'] = null;
   <!-- Include Popper.js and Bootstrap JavaScript -->
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
   <script src="../src/js/bootstrap/bootstrap.js"></script>
-  <script src="../src/js/search.js"></script>
+  <script>
+    const searchButton = document.getElementById("btn_search");
+    searchButton.addEventListener("click", () => {
+      const searchValue = document.getElementById("searchBar").value;
+      fetch('../controllers/searchDestination.php?searchValue=' + searchValue, {
+          method: 'GET',
+        })
+        .then((response) => {
+          response.text().then((data) => {
+            if (data != "" || data != null) {
+              document.querySelector("#cards").innerHTML = data;
+            }
+          });
+        });
+    });
+  </script>
 </body>
 
 </html>

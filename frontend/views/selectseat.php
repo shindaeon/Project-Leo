@@ -32,8 +32,57 @@ if (isset($bus_id)) {
       $passengers = json_decode($row['passengers']);
 } else {
       header('Location: ../index.php');
+      exit();
 }
 $query->close();
+
+ob_start();
+if (isset($_POST['btn_submit']) && !empty($_POST['seat'])) {
+      $selected_seat = $_POST['seat'];
+      foreach ($passengers as $passenger) {
+            if ($passenger->seatNumber == $selected_seat) {
+                  $barcode = $row['session_id'] . '-' . $row['bus_company_initials'] . $row['bus_number'] . '-' . 'PS' . $selected_seat;
+                  $passenger->status = 'reserved';
+                  $passenger->username = $_SESSION['username'];
+                  $passenger->ticket = $barcode;
+                  break;
+            }
+      }
+      $updated_passengers = json_encode($passengers);
+      $updateQuery = $dbConnection->prepare("
+                              UPDATE 
+                                    terminal_sessions
+                              SET 
+                                    passengers = ?
+                              WHERE
+                                    session_id = ?;
+                        ");
+      $updateQuery->bind_param('si', $updated_passengers, $row['session_id']);
+      $updateQuery->execute();
+      if ($updateQuery->affected_rows > 0) {
+
+            $receiptData = [
+                  'barcode' => $barcode,
+                  'destination' => $row['destination'],
+                  'bus_name' => $row['bus_company_name'],
+                  'bus_number' => $row['bus_number'],
+                  'bus_plate_number' => $row['bus_plate_number'],
+                  'bus_type' => $row['bus_type'],
+                  'seat_no' => $selected_seat,
+                  'fare_price' => $row['fare_price'],
+                  'date_booked' => date('Y-m-d H:i:s'),
+                  'expiration_date' => $row['expiration_date'],
+                  'departing_time' => $row['departing_time']
+            ];
+            $_SESSION['receiptData'] = $receiptData;
+            header('Location: ../views/receipt.php');
+      } else {
+            echo "<script>alert('Failed to reserve seat $selected_seat!')</script>";
+      }
+      ob_end_flush();
+      $updateQuery->close();
+      $dbConnection->close();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,17 +115,18 @@ $query->close();
                         <span class="badge text-dark bg-primary px-3 py-2">Selected</span>
                   </div>
             </div>
+
             <form method="post">
                   <div class="row">
                         <div class="col text-center mt-3">
-                                    <?php
-                                    //render the seats
-                                    include '../src/components/Seat.php';
-                                    foreach ($passengers as $passenger) {
-                                          Seat($passenger->seatNumber, $passenger->status);
-                                    }
+                              <?php
+                              //render the seats
+                              include '../src/components/Seat.php';
+                              foreach ($passengers as $passenger) {
+                                    echo Seat($passenger->seatNumber, $passenger->status);
+                              }
 
-                                    ?>
+                              ?>
                         </div>
                   </div>
                   <div class="row fixed-bottom p-3">
@@ -88,52 +138,6 @@ $query->close();
                         </div>
                   </div>
             </form>
-            <?php
-                  if(isset($_POST['btn_submit']) && !empty($_POST['seat'])) {
-                        $selected_seat = $_POST['seat'];
-                        foreach ($passengers as $passenger) {
-                              if ($passenger->seatNumber == $selected_seat) {
-                                    $barcode = $row['session_id'].'-'.$row['bus_company_initials'].$row['bus_number'].'-'.'PS'.$selected_seat;
-                                    $passenger->status = 'reserved';
-                                    $passenger->username = $_SESSION['username'];
-                                    $passenger->ticket = $barcode;
-                                    break;
-                              }
-                        }
-                        $updated_passengers = json_encode($passengers);
-                        $updateQuery = $dbConnection->prepare("
-                              UPDATE 
-                                    terminal_sessions
-                              SET 
-                                    passengers = ?
-                              WHERE
-                                    session_id = ?;
-                        ");
-                        $updateQuery->bind_param('si', $updated_passengers, $row['session_id']);
-                        $updateQuery->execute();
-                        if ($updateQuery->affected_rows > 0) {
-                              $receiptData = [
-                                    'barcode' => $barcode,
-                                    'destination' => $row['destination'],
-                                    'bus_name' => $row['bus_company_name'],
-                                    'bus_number' => $row['bus_number'],
-                                    'bus_plate_number' => $row['bus_plate_number'],
-                                    'bus_type' => $row['bus_type'],
-                                    'seat_no' => $selected_seat,
-                                    'fare_price' => $row['fare_price'],
-                                    'date_booked' => date('Y-m-d H:i:s'),
-                                    'expiration_date' => $row['expiration_date'],
-                                    'departing_time' => $row['departing_time']
-                              ];
-                              $_SESSION['receiptData'] = $receiptData;
-                              header('Location: ../views/receipt.php');
-                        } else {
-                              echo "<script>alert('Failed to reserve seat $selected_seat!')</script>";
-                        }
-                        $updateQuery->close();
-                        $dbConnection->close();
-                  }
-            ?>
       </div>
 
 
