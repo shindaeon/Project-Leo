@@ -120,12 +120,17 @@ if ($res->num_rows > 0) {
       <div class="container position-sticky fixed-bottom">
             <div class="row">
                   <div class="col">
-                        <button class="btn btn-secondary"><i class="fi fi-br-qr-scan me-2"></i><br>Scan Barcodes</button>
+                        <button class="btn btn-secondary" onclick="window.location.href = 'scancode.php';"
+                        <?php echo ($bus_status == 'DEPARTED' || $bus_status == 'DORMANT') ? 'disabled' : ''; ?>>
+                              <i class="fi fi-br-qr-scan me-2"></i><br>Scan Barcodes
+                        </button>
                   </div>
                   <div class="col d-flex justify-content-end">
-                        <a href="managepassengers.php">
-                              <button class="btn btn-secondary"><i class="fi fi-br-users-gear me-2"></i><br>Manage Passengers</button>
-                        </a>
+                        <button class="btn btn-secondary" onclick="window.location.href = 'managepassengers.php';"
+                        <?php echo ($bus_status == 'DEPARTED' || $bus_status == 'DORMANT') ? 'disabled' : ''; ?>>
+                              <i class="fi fi-br-users-gear me-2"></i><br>Manage Passengers
+                        </button>
+
                   </div>
             </div>
             <div class="row">

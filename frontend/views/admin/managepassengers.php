@@ -9,8 +9,13 @@ if ($_SESSION['terminal_session_id'] == 0) {
 if (!isset($_SESSION['terminal_session_id'])) {
       header('Location: busmanager.php');
 }
-include '../../controllers/dbConfig.php';
+$bus_data = $_SESSION['session_data'];
+if ($bus_data['bus_status'] == 'DORMANT' || $bus_data['bus_status'] == 'INACTIVE') {
+      header('Location: dashboard.php');
+      exit();
+}
 
+include '../../controllers/dbConfig.php';
 $terminal_session_id = $_SESSION['terminal_session_id'];
 $query = $dbConnection->prepare("SELECT * FROM terminal_sessions WHERE session_id = ? LIMIT 1");
 $query->bind_param("i", $terminal_session_id);
@@ -19,8 +24,6 @@ $result = $query->get_result();
 $session = $result->fetch_assoc();
 $query->close();
 $passengers = json_decode($session['passengers'], true);
-
-$bus_data = $_SESSION['session_data'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
