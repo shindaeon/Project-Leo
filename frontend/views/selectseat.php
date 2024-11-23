@@ -43,7 +43,7 @@ if (isset($_POST['btn_submit']) && !empty($_POST['seat'])) {
             if ($passenger->seatNumber == $selected_seat) {
                   $barcode = $row['session_id'] . '-' . $row['bus_company_initials'] . $row['bus_number'] . '-' . 'PS' . $selected_seat;
                   $passenger->status = 'reserved';
-                  $passenger->username = $_SESSION['username'];
+                  $passenger->username = $_SESSION['full_name'];
                   $passenger->ticket = $barcode;
                   break;
             }
@@ -129,7 +129,8 @@ if (isset($_POST['btn_submit']) && !empty($_POST['seat'])) {
                               ?>
                         </div>
                   </div>
-                  <div class="row fixed-bottom p-3">
+                  <div class="m-3 p-3"></div>
+                  <div class="row fixed-bottom pb-3 pe-3">
                         <div class="col d-flex justify-content-end">
                               <button type="submit" class="btn btn-primary" name="btn_submit">
                                     <i class="fi fi-br-check me-2"></i>Book Now

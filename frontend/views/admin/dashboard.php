@@ -123,7 +123,9 @@ if ($res->num_rows > 0) {
                         <button class="btn btn-secondary"><i class="fi fi-br-qr-scan me-2"></i><br>Scan Barcodes</button>
                   </div>
                   <div class="col d-flex justify-content-end">
-                        <button class="btn btn-secondary"><i class="fi fi-br-users-gear me-2"></i><br>Manage Passengers</button>
+                        <a href="managepassengers.php">
+                              <button class="btn btn-secondary"><i class="fi fi-br-users-gear me-2"></i><br>Manage Passengers</button>
+                        </a>
                   </div>
             </div>
             <div class="row">
