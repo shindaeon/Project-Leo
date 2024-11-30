@@ -34,6 +34,10 @@ $_SESSION['receiptData'] = null;
   );
   ?>
 
+  <div class="container pt-3 px-3">
+    <span class="h1 text-primary">Bus Finder</span>
+  </div>
+
   <div class="container px-2 py-3 d-flex justify-content-center align-content-center">
     <?php
     include '../src/components/SearchBar.php';
@@ -46,7 +50,7 @@ $_SESSION['receiptData'] = null;
 
 
 
-  <div class="container p-2" id="cards">
+  <div class="container py-1 px-3" id="cards">
     <?php
     include '../src/components/Card.php';
     $query = $dbConnection->prepare("

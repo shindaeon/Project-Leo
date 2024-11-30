@@ -90,6 +90,9 @@ if ($res->num_rows > 0) {
                               <i class="fi fi-br-menu-burger me-2"></i>Menu
                         </button>
                   </div>
+                  <div class="col d-flex justify-content-center align-content-center p-1">
+                        <img src="../../public/logogrey_circle.png" class="img-fluid" height="30" width="30" alt="">
+                  </div>
                   <div class='col d-flex justify-content-end align-items-center'>
                         <a href="../admin/busmanager.php">
                               <button class='btn btn-secondary btn-nav'><i class="fi fi-br-cross me-2"></i>Exit</button>

@@ -23,6 +23,9 @@ function NavBar($btn1_icon, $btn1_name, $btn2_icon, $btn2_name, $username, $full
             <div class='col d-flex align-items-center'>
                 <button class='btn btn-primary btn-nav' type='button' data-bs-toggle='offcanvas' data-bs-target='#menu' aria-controls='offcanvasWithBothOptions'>$btn1_icon $btn1_name</button>
             </div>
+            <div class="col d-flex justify-content-center align-content-center p-1">
+              <img src="../public/LogoCircle.png" class="img-fluid" height="30" width="30" alt="">
+            </div>
             <div class='col d-flex justify-content-end align-items-center'>
                 <button class='btn btn-primary btn-nav' data-bs-toggle='offcanvas' data-bs-target='#profile' aria-controls='offcanvasWithBothOptions'>$btn2_icon $btn2_name</button>
             </div>

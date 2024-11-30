@@ -61,6 +61,9 @@ unset($_SESSION['bus_plate_number'], $_SESSION['terminal_session_id']);
                               <?php echo $_SESSION['emp_full_name']; ?>
                         </span>
                   </div>
+                  <div class="col d-flex justify-content-center align-content-center p-1">
+                        <img src="../../public/logogrey_circle.png" class="img-fluid" height="30" width="30" alt="">
+                  </div>
                   <div class='col d-flex justify-content-end align-items-center'>
                         <button onclick="logout()" class='btn btn-secondary btn-nav'><i class="fi fi-br-sign-out-alt me-2"></i>Logout</button>
                   </div>
@@ -102,25 +105,25 @@ unset($_SESSION['bus_plate_number'], $_SESSION['terminal_session_id']);
       </div>
 
       <?php
-            if(isset($_POST['btn_add'])){
-                  $bus_company_name = $_POST['bus_company_name'];
-                  $bus_number = $_POST['bus_number'];
-                  $bus_plate_number = $_POST['bus_plate_number'];
-                  $bus_company_initials = $_POST['bus_company_initials'];
-                  $bus_type = $_POST['bus_type'];
-                  $bus_key = $_POST['bus_key'];
+      if (isset($_POST['btn_add'])) {
+            $bus_company_name = $_POST['bus_company_name'];
+            $bus_number = $_POST['bus_number'];
+            $bus_plate_number = $_POST['bus_plate_number'];
+            $bus_company_initials = $_POST['bus_company_initials'];
+            $bus_type = $_POST['bus_type'];
+            $bus_key = $_POST['bus_key'];
 
-                  $query = $dbConnection->prepare("INSERT INTO buses (bus_company_name, bus_number, bus_plate_number, bus_company_initials, bus_type, bus_key) VALUES (?, ?, ?, ?, ?, ?)");
-                  $query->bind_param('ssssss', $bus_company_name, $bus_number, $bus_plate_number, $bus_company_initials, $bus_type, $bus_key);
-                  $query->execute();
-                  $dbConnection->close();
-                  $query->close();
-                  if ($query) {
-                        echo '<script>alert("Bus added successfully")</script>';
-                  } else {
-                        echo '<script>alert("Failed to add bus")</script>';
-                  }
+            $query = $dbConnection->prepare("INSERT INTO buses (bus_company_name, bus_number, bus_plate_number, bus_company_initials, bus_type, bus_key) VALUES (?, ?, ?, ?, ?, ?)");
+            $query->bind_param('ssssss', $bus_company_name, $bus_number, $bus_plate_number, $bus_company_initials, $bus_type, $bus_key);
+            $query->execute();
+            $dbConnection->close();
+            $query->close();
+            if ($query) {
+                  echo '<script>alert("Bus added successfully")</script>';
+            } else {
+                  echo '<script>alert("Failed to add bus")</script>';
             }
+      }
       ?>
 
       <div class="modal fade" id="newBus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

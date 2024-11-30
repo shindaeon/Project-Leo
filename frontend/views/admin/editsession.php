@@ -32,6 +32,9 @@ include '../../controllers/dbConfig.php';
                               <button class='btn btn-secondary btn-nav'><i class="fi fi-br-angle-left me-2"></i>Back</button>
                         </a>
                   </div>
+                  <div class="col d-flex justify-content-center align-content-center p-1">
+                        <img src="../../public/logogrey_circle.png" class="img-fluid" height="30" width="30" alt="">
+                  </div>
                   <div class='col d-flex justify-content-end align-items-center'>
                         <button class='btn btn-secondary btn-nav' onclick="logout()"><i class="fi fi-br-sign-out-alt me-2"></i>Logout</button>
                   </div>
