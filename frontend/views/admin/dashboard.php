@@ -71,7 +71,7 @@ if ($res->num_rows > 0) {
 <html lang="en">
 
 <head>
-      <title>Project Leoforeio</title>
+      <title>Buzcaya Terminal</title>
       <meta charset="UTF-8" />
       <link rel="icon" type="image/svg+xml" href="../../public/LogoCircle.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -89,6 +89,9 @@ if ($res->num_rows > 0) {
                         <button class='btn btn-secondary btn-nav' data-bs-toggle='offcanvas' data-bs-target='#menu' aria-controls='offcanvasWithBothOptions'>
                               <i class="fi fi-br-menu-burger me-2"></i>Menu
                         </button>
+                  </div>
+                  <div class="col d-flex justify-content-center align-content-center p-1">
+                        <img src="../../public/logogrey_circle.png" class="img-fluid" height="30" width="30" alt="">
                   </div>
                   <div class='col d-flex justify-content-end align-items-center'>
                         <a href="../admin/busmanager.php">

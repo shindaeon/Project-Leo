@@ -17,7 +17,7 @@ if (isset($_POST['btn_submit'])) {
             $user = $res->fetch_assoc();
             $_SESSION['emp_username'] = $user['username'];
             $_SESSION['emp_full_name'] = $user['cashier_name'];
-            if ($user['current_terminal_session'] != NULL){
+            if ($user['current_terminal_session'] != NULL) {
                   $_SESSION['terminal_session_id'] = $user['current_terminal_session'];
                   header('Location: dashboard.php');
             } else {
@@ -34,7 +34,7 @@ if (isset($_POST['btn_submit'])) {
 <html lang="en">
 
 <head>
-      <title>Project Leoforeio</title>
+      <title>Buzcaya Terminal</title>
       <meta charset="UTF-8" />
       <link rel="icon" type="image/svg+xml" href="../../public/LogoCircle.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -67,23 +67,26 @@ if (isset($_POST['btn_submit'])) {
                                                       <label for="password" class="form-label text-dark">Your Password:</label>
                                                       <input type="password" class="form-control bg-dark text-light border-0 p-2" id="password" name="password" required>
                                                 </div>
-                                                <div class="row position-sticky fixed-bottom bg-dark p-3 rounded-top-5">
-                                                      <div class="col d-flex justify-content-center">
-                                                            <button class="btn bg-secondary text-light mb-3" type="submit" name="btn_submit">
-                                                                  <i class="fi fi-br-sign-in-alt me-1"></i>
-                                                                  Sign in
-                                                            </button>
-                                                      </div>
-                                                      <p class="text-light text-center">
-                                                            For new employees, ask your employer for a new account.
-                                                      </p>
-                                                </div>
-                                          </form>
                                     </div>
                               </div>
                         </div>
                   </div>
             </div>
+      </div>
+      <div class="p-4 m-4"></div>
+      <div class="container position-fixed fixed-bottom">
+            <div class="bg-dark p-3 rounded-top-5">
+                  <div class="col d-flex justify-content-center">
+                        <button class="btn bg-secondary text-light mb-3" type="submit" name="btn_submit">
+                              <i class="fi fi-br-sign-in-alt me-1"></i>
+                              Sign in
+                        </button>
+                  </div>
+                  <p class="text-light text-center">
+                        For new employees, ask your employer for a new account.
+                  </p>
+            </div>
+            </form>
       </div>
 
       <!-- Include Popper.js and Bootstrap JavaScript -->

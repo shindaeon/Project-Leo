@@ -7,7 +7,7 @@ $_SESSION['receiptData'] = null;
 <html lang="en">
 
 <head>
-  <title>Project Leoforeio</title>
+  <title>Buzcaya</title>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="../public/LogoCircle.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,8 +24,6 @@ $_SESSION['receiptData'] = null;
   include '../controllers/dbConfig.php';
 
   NavBar(
-    '<i class="fa fi-br-menu-burger me-2"></i>',
-    'Menu',
     '<i class="fa fi-br-user me-2"></i>',
     'Profile',
     $_SESSION['username'],
@@ -33,6 +31,10 @@ $_SESSION['receiptData'] = null;
     $_SESSION['email']
   );
   ?>
+
+  <div class="container pt-3 px-3">
+    <span class="h1 text-primary">Bus Finder</span>
+  </div>
 
   <div class="container px-2 py-3 d-flex justify-content-center align-content-center">
     <?php
@@ -46,7 +48,7 @@ $_SESSION['receiptData'] = null;
 
 
 
-  <div class="container p-2" id="cards">
+  <div class="container py-1 px-3" id="cards">
     <?php
     include '../src/components/Card.php';
     $query = $dbConnection->prepare("

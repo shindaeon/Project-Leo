@@ -29,7 +29,7 @@ $passengers = json_decode($session['passengers'], true);
 <html lang="en">
 
 <head>
-      <title>Project Leoforeio</title>
+      <title>Buzcaya Terminal</title>
       <meta charset="UTF-8" />
       <link rel="icon" type="image/svg+xml" href="../../public/LogoCircle.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -49,6 +49,9 @@ $passengers = json_decode($session['passengers'], true);
                                     <i class="fi fi-br-angle-left me-2"></i>Back
                               </button>
                         </a>
+                  </div>
+                  <div class="col d-flex justify-content-center align-content-center p-1">
+                        <img src="../../public/logogrey_circle.png" class="img-fluid" height="30" width="30" alt="">
                   </div>
                   <div class='col d-flex justify-content-end align-items-center'>
                         <a href="../admin/busmanager.php">
@@ -78,7 +81,8 @@ $passengers = json_decode($session['passengers'], true);
                                     <tr class="align-middle">
                                           <th class="bg-primary">Seat Number</th>
                                           <th class="bg-secondary">Name</th>
-                                          <th class="bg-primary">Actions</th>
+                                          <th class="bg-primary">Status</th>
+                                          <th class="bg-secondary">Actions</th>
                                     </tr>
                               </thead>
                               <tbody class="text-center">
@@ -88,15 +92,19 @@ $passengers = json_decode($session['passengers'], true);
                                           if ($passenger['status'] == "available") {
                                                 echo '<form method="POST" action="">' .
                                                       "<td>" . $passenger['seatNumber'] . "</td>" .
-                                                      "<td><input type='text' name='assignedName' class='form-control'></td>" .
+                                                      "<td><input type='text' name='assignedName' class='form-control' required></td>" .
+                                                      "<td class='text-uppercase'>". $passenger['status'] . "</td>".
                                                       '<td>
                                                             <input type="hidden" name="seatNumber" value="' . $passenger['seatNumber'] . '">
                                                             <button type="submit" name="assignSeat" class="btn btn-success">Assign</button>
+                                                            </td>
+                                                            
                                                       </form>
-                                                </td>';
+                                                      ';
                                           } else {
                                                 echo "<td>" . $passenger['seatNumber'] . "</td>";
                                                 echo "<td>" . $passenger['username'] . "</td>";
+                                                echo "<td class='text-uppercase'>". $passenger['status'] . "</td>";
                                                 echo '<td>
                                                             <form method="POST" action="">
                                                                   <input type="hidden" name="seatNumber" value="' . $passenger['seatNumber'] . '">
@@ -110,7 +118,7 @@ $passengers = json_decode($session['passengers'], true);
                               </tbody>
                               <tfoot>
                                     <tr>
-                                          <td colspan="3" class="text-center">--- Nothing Follows ---</td>
+                                          <td colspan="4" class="text-center">--- Nothing Follows ---</td>
 
                                     </tr>
                               </tfoot>

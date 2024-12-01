@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-      <title>Sign Up</title>
+      <title>Buzcaya</title>
       <meta charset="UTF-8" />
       <link rel="icon" type="image/svg+xml" href="../public/LogoCircle.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,7 +23,8 @@
             <div class="row">
                   <div class="col">
                         <div class="mx-3">
-                              <h1 class="text-center text-primary mb-3">Sign up</h1>
+                              <h1 class="text-center text-primary mb-1">Buzcaya</h1>
+                              <h4 class="text-center text-light mb-4">Sign Up</h4>
                               <form method="POST">
                                     <div class="row mb-3 px-1">
                                           <div class="col">
@@ -51,24 +52,25 @@
                                           <label for="repassword" class="form-label fs-6">Re-type password:</label>
                                           <input type="password" class="form-control bg-primary border-0 p-2" id="repassword" name="repassword" required>
                                     </div>
+                                    <div class="m-4 p-3"></div>
 
-
-
-                                    <div class="row bg-secondary p-3 rounded-top-5">
-                                          <div class="col d-flex justify-content-center">
-                                                <button class="btn bg-primary mb-3" id="btn_signup">
-                                                      <i class="fi fi-br-sign-in-alt me-1"></i>
-                                                      Sign up
-                                                </button>
-                                          </div>
-                                          <p class="text-dark text-center">
-                                                Already have an account?
-                                                <a href="login.php">Log in</a>
-                                          </p>
-                                    </div>
-                              </form>
                         </div>
                   </div>
+            </div>
+      </div>
+      <div class="container px-3 position-sticky fixed-bottom">
+            <div class="row bg-secondary p-3 rounded-top-5">
+                  <div class="col d-flex justify-content-center">
+                        <button class="btn bg-primary mb-3" id="btn_signup">
+                              <i class="fi fi-br-sign-in-alt me-1"></i>
+                              Sign up
+                        </button>
+                        </form>
+                  </div>
+                  <p class="text-dark text-center">
+                        Already have an account?
+                        <a href="login.php">Log in</a>
+                  </p>
             </div>
       </div>
 

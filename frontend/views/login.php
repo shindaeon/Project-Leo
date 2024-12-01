@@ -30,7 +30,7 @@ if (isset($_POST['btn_submit'])) {
 <html lang="en">
 
 <head>
-      <title>Login</title>
+      <title>Buzcaya</title>
       <meta charset="UTF-8" />
       <link rel="icon" type="image/svg+xml" href="../public/LogoCircle.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -53,7 +53,8 @@ if (isset($_POST['btn_submit'])) {
                         <div class="mx-3">
                               <div class="row">
                                     <div class="col">
-                                          <h1 class="text-center text-primary mb-3">Log in</h1>
+                                          <h1 class="text-center text-primary mb-1">Buzcaya</h1>
+                                          <h4 class="text-center text-light mb-4">Log in</h4>
                                           <form method="POST">
                                                 <div class="mb-3 px-5">
                                                       <label for="username" class="form-label">Your Username:</label>

@@ -26,7 +26,7 @@ if ($bus_data['bus_status'] == 'DORMANT' || $bus_data['bus_status'] == 'INACTIVE
 <html lang="en">
 
 <head>
-      <title>Project Leoforeio</title>
+      <title>Buzcaya Terminal</title>
       <meta charset="UTF-8" />
       <link rel="icon" type="image/svg+xml" href="../../public/LogoCircle.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -46,6 +46,9 @@ if ($bus_data['bus_status'] == 'DORMANT' || $bus_data['bus_status'] == 'INACTIVE
                                     <i class="fi fi-br-angle-left me-2"></i>Back
                               </button>
                         </a>
+                  </div>
+                  <div class="col d-flex justify-content-center align-content-center p-1">
+                        <img src="../../public/logogrey_circle.png" class="img-fluid" height="30" width="30" alt="">
                   </div>
                   <div class='col d-flex justify-content-end align-items-center'>
                         <a href="../admin/busmanager.php">
@@ -81,7 +84,7 @@ if ($bus_data['bus_status'] == 'DORMANT' || $bus_data['bus_status'] == 'INACTIVE
             <div class="row position-sticky fixed-bottom px-4 pb-3">
                   <div class="col">
                         <a href="managepassengers.php">
-                              <button type="button" class="btn btn-secondary">Manage</button>
+                              <button type="button" class="btn btn-secondary"><i class="fi fi-br-users-gear me-2"></i>Manage</button>
                         </a>
                   </div>
                   <div class="d-flex col justify-content-end">
