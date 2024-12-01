@@ -26,7 +26,7 @@ if ($bus_data['bus_status'] == 'DORMANT' || $bus_data['bus_status'] == 'INACTIVE
 <html lang="en">
 
 <head>
-      <title>Project Leoforeio</title>
+      <title>Buzcaya Terminal</title>
       <meta charset="UTF-8" />
       <link rel="icon" type="image/svg+xml" href="../../public/LogoCircle.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />

@@ -1,5 +1,5 @@
 <?php
-function NavBar($btn1_icon, $btn1_name, $btn2_icon, $btn2_name, $username, $full_name, $email)
+function NavBar($btn2_icon, $btn2_name, $username, $full_name, $email)
 {
   echo <<<HTML
     <script>
@@ -20,39 +20,14 @@ function NavBar($btn1_icon, $btn1_name, $btn2_icon, $btn2_name, $username, $full
     </script>
     <div class='container-fluid p-2 bg-grey position-sticky fixed-top'>
         <div class='row'>
-            <div class='col d-flex align-items-center'>
-                <button class='btn btn-primary btn-nav' type='button' data-bs-toggle='offcanvas' data-bs-target='#menu' aria-controls='offcanvasWithBothOptions'>$btn1_icon $btn1_name</button>
-            </div>
-            <div class="col d-flex justify-content-center align-content-center p-1">
-              <img src="../public/LogoCircle.png" class="img-fluid" height="30" width="30" alt="">
+            <div class="col d-flex align-content-center p-1">
+              <img src="../public/LogoCircle.png" class="ms-2" height="25" width="25" alt="">
+              <span class="mx-2 text-primary">Buzcaya</span>
             </div>
             <div class='col d-flex justify-content-end align-items-center'>
                 <button class='btn btn-primary btn-nav' data-bs-toggle='offcanvas' data-bs-target='#profile' aria-controls='offcanvasWithBothOptions'>$btn2_icon $btn2_name</button>
             </div>
         </div>
-    </div>
-
-    <div class="offcanvas offcanvas-start bg-grey text-light p-2" data-bs-scroll="true" tabindex="-1" id="menu" aria-labelledby="offcanvasWithBothOptionsLabel">
-      <div class="offcanvas-header">
-        <div class="row">
-          <div class="col-3 align-content-center">
-            <img src="../public/LogoRoundedSquare.png" alt="Logo" class="img-fluid" >
-          </div>
-          <div class="col-6 align-content-center">
-            <h2 class="offcanvas-title text-primary" id="offcanvasWithBothOptionsLabel">Menu</h2></div>
-          <div class="col-3 align-content-center justify-content-end">
-            <button type="button" class="btn btn-primary " data-bs-dismiss="offcanvas" aria-label="Close"><i class="fi fi-br-circle-xmark" style="font-size: 1.25rem;"></i></button>
-          </div>
-        </div>
-
-      </div>
-      <div class="offcanvas-body">
-        <ul class="list-unstyled">
-          <li class="h4 p-2"><a href=""><i class="fi fi-br-bus-alt me-3"></i>Bus Finder</a></li>
-          <li class="h4 p-2"><a href=""><i class="fi fi-br-time-past me-3"></i>Book History</a></li>
-          <li class="h4 p-2"><a href="#" data-bs-toggle='offcanvas' data-bs-target='#profile'><i class="fi fi-br-user me-3"></i>Profile</a></li>
-        </ul>
-      </div>
     </div>
 
     <div class="offcanvas offcanvas-end bg-grey text-light p-2" data-bs-scroll="true" tabindex="-1" id="profile" aria-labelledby="offcanvasWithBothOptionsLabel">
